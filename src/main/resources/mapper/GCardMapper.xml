@@ -1,0 +1,243 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.alice.game.dao.GCardMapper" >
+  <resultMap id="BaseResultMap" type="com.alice.game.entity.GCard" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="cardName" property="cardname" jdbcType="VARCHAR" />
+    <result column="cardSource" property="cardsource" jdbcType="VARCHAR" />
+    <result column="cardQuality" property="cardquality" jdbcType="INTEGER" />
+    <result column="cardDescription" property="carddescription" jdbcType="VARCHAR" />
+    <result column="cardStar" property="cardstar" jdbcType="INTEGER" />
+    <result column="cardURL" property="cardurl" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    id, cardName, cardSource, cardQuality, cardDescription, cardStar, cardURL
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.alice.game.entity.GCardExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from g_card
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from g_card
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from g_card
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.alice.game.entity.GCardExample" >
+    delete from g_card
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.alice.game.entity.GCard" >
+    insert into g_card (id, cardName, cardSource, 
+      cardQuality, cardDescription, cardStar, 
+      cardURL)
+    values (#{id,jdbcType=INTEGER}, #{cardname,jdbcType=VARCHAR}, #{cardsource,jdbcType=VARCHAR}, 
+      #{cardquality,jdbcType=INTEGER}, #{carddescription,jdbcType=VARCHAR}, #{cardstar,jdbcType=INTEGER}, 
+      #{cardurl,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.alice.game.entity.GCard" >
+    insert into g_card
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="cardname != null" >
+        cardName,
+      </if>
+      <if test="cardsource != null" >
+        cardSource,
+      </if>
+      <if test="cardquality != null" >
+        cardQuality,
+      </if>
+      <if test="carddescription != null" >
+        cardDescription,
+      </if>
+      <if test="cardstar != null" >
+        cardStar,
+      </if>
+      <if test="cardurl != null" >
+        cardURL,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="cardname != null" >
+        #{cardname,jdbcType=VARCHAR},
+      </if>
+      <if test="cardsource != null" >
+        #{cardsource,jdbcType=VARCHAR},
+      </if>
+      <if test="cardquality != null" >
+        #{cardquality,jdbcType=INTEGER},
+      </if>
+      <if test="carddescription != null" >
+        #{carddescription,jdbcType=VARCHAR},
+      </if>
+      <if test="cardstar != null" >
+        #{cardstar,jdbcType=INTEGER},
+      </if>
+      <if test="cardurl != null" >
+        #{cardurl,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.alice.game.entity.GCardExample" resultType="java.lang.Integer" >
+    select count(*) from g_card
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update g_card
+    <set >
+      <if test="record.id != null" >
+        id = #{record.id,jdbcType=INTEGER},
+      </if>
+      <if test="record.cardname != null" >
+        cardName = #{record.cardname,jdbcType=VARCHAR},
+      </if>
+      <if test="record.cardsource != null" >
+        cardSource = #{record.cardsource,jdbcType=VARCHAR},
+      </if>
+      <if test="record.cardquality != null" >
+        cardQuality = #{record.cardquality,jdbcType=INTEGER},
+      </if>
+      <if test="record.carddescription != null" >
+        cardDescription = #{record.carddescription,jdbcType=VARCHAR},
+      </if>
+      <if test="record.cardstar != null" >
+        cardStar = #{record.cardstar,jdbcType=INTEGER},
+      </if>
+      <if test="record.cardurl != null" >
+        cardURL = #{record.cardurl,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update g_card
+    set id = #{record.id,jdbcType=INTEGER},
+      cardName = #{record.cardname,jdbcType=VARCHAR},
+      cardSource = #{record.cardsource,jdbcType=VARCHAR},
+      cardQuality = #{record.cardquality,jdbcType=INTEGER},
+      cardDescription = #{record.carddescription,jdbcType=VARCHAR},
+      cardStar = #{record.cardstar,jdbcType=INTEGER},
+      cardURL = #{record.cardurl,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.alice.game.entity.GCard" >
+    update g_card
+    <set >
+      <if test="cardname != null" >
+        cardName = #{cardname,jdbcType=VARCHAR},
+      </if>
+      <if test="cardsource != null" >
+        cardSource = #{cardsource,jdbcType=VARCHAR},
+      </if>
+      <if test="cardquality != null" >
+        cardQuality = #{cardquality,jdbcType=INTEGER},
+      </if>
+      <if test="carddescription != null" >
+        cardDescription = #{carddescription,jdbcType=VARCHAR},
+      </if>
+      <if test="cardstar != null" >
+        cardStar = #{cardstar,jdbcType=INTEGER},
+      </if>
+      <if test="cardurl != null" >
+        cardURL = #{cardurl,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.alice.game.entity.GCard" >
+    update g_card
+    set cardName = #{cardname,jdbcType=VARCHAR},
+      cardSource = #{cardsource,jdbcType=VARCHAR},
+      cardQuality = #{cardquality,jdbcType=INTEGER},
+      cardDescription = #{carddescription,jdbcType=VARCHAR},
+      cardStar = #{cardstar,jdbcType=INTEGER},
+      cardURL = #{cardurl,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

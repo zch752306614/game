@@ -3,6 +3,9 @@ package com.alice.game;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
+/**
+ * @author alice
+ */
 @SpringBootApplication
 public class GameApplication {
 
