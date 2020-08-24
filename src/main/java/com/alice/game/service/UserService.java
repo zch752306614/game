@@ -1,16 +1,19 @@
-package com.alice.game.dao;
+package com.alice.game.service;
 
 import com.alice.game.entity.GUser;
 import com.alice.game.entity.GUserExample;
-import java.util.List;
 import org.apache.ibatis.annotations.Param;
+import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 /**
  * @author Alice
  * @version 1.0
  * @date 2020/8/22 9:01
  */
-public interface GUserMapper {
+@Service
+public interface UserService {
     int countByExample(GUserExample example);
 
     int deleteByExample(GUserExample example);

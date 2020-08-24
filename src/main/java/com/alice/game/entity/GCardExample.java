@@ -3,6 +3,11 @@ package com.alice.game.entity;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * @author Alice
+ * @version 1.0
+ * @date 2020/8/22 9:01
+ */
 public class GCardExample {
     protected String orderByClause;
 

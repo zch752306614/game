@@ -1,8 +1,9 @@
-package com.alice.game.dao;
+package com.alice.game.service;
 
 import com.alice.game.entity.GAdmin;
 import com.alice.game.entity.GAdminExample;
 import org.apache.ibatis.annotations.Param;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 
@@ -11,7 +12,8 @@ import java.util.List;
  * @version 1.0
  * @date 2020/8/22 9:01
  */
-public interface GAdminMapper {
+@Service
+public interface AdminService {
     int countByExample(GAdminExample example);
 
     int deleteByExample(GAdminExample example);
